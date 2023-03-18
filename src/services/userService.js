@@ -7,6 +7,7 @@ const userService = {
             const [emailDistint] = await connection.query(`SELECT DISTINCT(email) FROM usuarios`);
             emailDistint.map((item) => {
                 if (item.email === user.email) {
+                    
                     throw new Error(`El correo ${user.email} ya está reguistrado`);
                 }
             });
@@ -34,10 +35,14 @@ const userService = {
         try {
             const getUserById = await connection.query(`SELECT * FROM usuarios WHERE id = ${id};`);
             if (!getUserById[0].length) {
+                await connection.end();
                 return console.log(`no se encontro usuario con id: ${id}`);
+
             }
+            await connection.end();
             return getUserById;
         } catch (error) {
+            await connection.end();
             throw new Error(error);
         }
     },
@@ -48,8 +53,10 @@ const userService = {
             if (!getUsers[0].length) {
                 return console.log(`Don't Users exist  in DB`, error);
             }
+            await connection.end();
             return getUsers;
         } catch (error) {
+            await connection.end();
             throw new Error(error)
         }
     },
@@ -67,3 +74,4 @@ const userService = {
 
 }
 export default userService;
+userService.find(1).then(console.log);

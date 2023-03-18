@@ -1,5 +1,6 @@
-import { createConnection, createPool } from 'mysql2/promise';
+import { createPool } from 'mysql2/promise';
 import envs from './env-config.js';
+
 
 export const connection = await createPool({
     host: envs.db_host,
