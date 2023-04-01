@@ -1,14 +1,14 @@
 services:
-  videos:
+  notas:
     image: mysql:5.7
     environment:
-      MYSQL_DATABASE: 'video-upload'
+      MYSQL_DATABASE: 'notas'
       MYSQL_USER: 'enoc'
       MYSQL_PASSWORD: '1234'
       MYSQL_ROOT_PASSWORD: '1234'
     volumes:
       # Montamos un volumen para MySQL para no perder los datos de bd
-      - ./volumenes/videos:/var/lib/mysql
+      - ./volumenes/notas:/var/lib/mysql
     expose:
       - 3309
     ports:

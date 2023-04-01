@@ -43,7 +43,8 @@ const userController = {
     },
 
     getUsers: async (req = request, res = response) => {
-        const [result] = await userService.findAll();
+        const result = await userService.findAll();
+        console.log(result);
         res.status(200).json({ data: result });
     },
 
